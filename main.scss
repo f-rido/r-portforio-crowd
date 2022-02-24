@@ -1,0 +1,804 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap');
+
+/*レスポンシブ スマホ画面サイズ 599px以下の定義*/
+ $mb: 599px;/*(画面サイズによりpx数値を変える)*/
+@mixin mobile {
+  @media screen and (max-width:$mb){
+    @content;
+  }
+}
+/* 要素に記載するコード */
+// @include mobile{
+//   cssの内容;
+// }
+
+html { 
+  scroll-behavior: smooth;
+  scroll-padding-top: 75px;
+
+  /*========= Loadingアニメーション ===============*/
+  /* Loading背景画面設定　*/
+  #splash {
+    /*fixedで全面に固定*/
+  position: fixed;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  background:rgba(182, 183, 184, 0.941);
+  text-align:center;
+  color:rgb(255, 255, 255);
+  }
+
+  /* Loadingバー中央配置　*/
+  #splash_text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+    z-index: 999;
+  width: 100%;
+  transform: translate(-50%, -50%);
+  color: rgb(255, 255, 255);
+  }
+
+  body{
+    margin: 0 auto;
+    font-family: serif;
+    letter-spacing: 1.5px;
+    width: 100%;
+    @include mobile{
+      width: 100%;
+    }
+
+
+    /* ヘッダー　*/
+    header {
+      width: 100%;
+      height: 96px;
+      padding: 22.5px 0;
+      background-color: rgba(198, 218, 255, 0.941);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 10;
+      text-align: center;
+      @include mobile {
+        height: 96px;
+        padding: 0;
+        }
+
+        .header-contents {
+          max-width: 960px;
+          margin: 0 auto;
+          display: flex;
+          justify-content:space-between;
+          align-items: center;
+          @include mobile {
+              display:flex;
+              flex-flow: column;
+              height: 96px;
+            }
+
+            #logo{
+              @include mobile {
+                max-width: 599px;
+                height: 48px;
+              }
+
+              a{
+                display: block;
+                text-decoration: none;
+                color: #000;
+                transition-duration: 0.5s;
+                &:hover{
+                  letter-spacing: 4px;
+                  transition-duration: 0.5s;
+                }
+              }
+            }
+
+            #menu_btn {
+              color: #fff;
+              border-radius: 4px;
+              padding: 8px 16px;
+              background-color: #858587;
+              cursor: pointer;
+              transition-duration: 0.5s;
+              &:hover {
+                background-color: #fff;
+                border-color: #fff;
+                color: black;
+                transition-duration: 0.5s;
+              }
+              @include mobile {
+                width: 100%;
+                border-radius: 0;
+              }
+            }
+        }
+    }
+
+    /*---------- #menu ----------*/
+    #menu {
+      width: 100%;
+      max-width: 240px;
+      height: 100%;
+      background-color: rgba(198, 218, 255, 0.941);
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 10;
+      transform: translate(250px);
+      transition: all .5s;
+      @include mobile {
+        width: 152px;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+      
+        li {
+          font-weight: bold;
+          border-bottom: 1px solid #fff;
+          &:hover {
+              background-color: #fff;
+              border-color: #fff;
+              color: black;
+              transition-duration: 0.3s;
+              cursor: pointer;
+          }
+        
+          a{
+              display: block;
+              padding: 8px;
+              text-decoration: none;
+              color: #061562fa;
+              transition-duration: 0.3s;
+              &:hover {
+              letter-spacing: 4px;
+              }
+            }
+        }
+      }
+    }
+
+    #menu.open {
+      transform: translate(0);
+    }
+ 
+
+    /* --- .menu-background （メニュー開くと暗くなる）--- */
+    .menu-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+    .menu-background.open {
+      width: 100%;
+      height: 100%;
+      opacity: 1;
+    }
+
+    /* ---------- main ----------*/
+    main {
+      width: 100%;
+      height:652px;
+      background-image: url("img/top.jpg");
+      background-position: center;
+      background-size: cover;
+      position: relative;
+      padding-top: 96px;
+      @include mobile {
+        height:476px;
+      }
+
+      /* ---------- メイン画像を暗くする ----------*/
+      #mainback{
+        position: absolute;
+        width: 100%;
+        height:556px;
+        background: rgba(0, 0, 0, 0.5);
+        @include mobile {
+          height:380px;
+        }
+
+        .main-wrapper {
+            position: relative;
+            max-width: 960px;
+            height: 320px;
+            margin: 0 auto;
+            padding: 192px 0;
+            @include mobile {
+              height: 380px;
+              padding: 94px 0 64px 0;
+            }
+
+          h2 {
+              vertical-align: middle;
+              color: white;
+              font-size: 40px;
+              text-align: center;
+              @include mobile {
+                display: block;
+              }
+            }
+
+          h2:first-child {
+                text-align: left;
+                padding-left: 152px;
+                @include mobile {
+                  text-align: center;
+                padding-left: 0px;
+                }
+          }
+
+          h2:last-child {
+            text-align: right;
+            padding-right: 152px;
+            @include mobile {
+              text-align: center;
+              padding-right: 0px;
+            }
+          }
+        }
+      }
+    }
+
+    // /* ---------- main>h2ふわっと ----------*/
+    .load-fade {opacity : 0; transition : all 2s/*処理にかかる時間*/;}
+    .load-up{opacity: 0; transform: translateY(100px)/*スクロールアップする距離*/; transition: all 5s/*処理にかかる時間*/;}
+    .load-up.done, .load-fade.done{opacity : 1; transform : translate(0, 0);}
+
+
+    /* ---------- #profile ----------*/
+    #profile{
+      text-align: center;
+      padding: 40px 0;
+
+      >h2{
+        max-width: 600px;
+        border: solid 2px black;
+        padding: 8px 0px;
+        font-size: 32px;
+        margin: 0 auto;
+      }
+
+      #myintro{
+        display: flex;
+        justify-content: center;
+        margin: 40px 0;
+        gap: 32px;
+        @include mobile {
+          display:flex;
+          flex-flow: column;
+        }
+
+        >img{
+          width: 200px;
+          height: 200px;
+          border-radius: 50%;
+          @include mobile {
+            margin: 0 auto;
+          }
+        }
+
+        #myname{
+          text-align: left;
+          border-left: 10px solid #000;
+          padding-left: 32px;
+          @include mobile {
+            border-left: 0px;
+          }
+
+          h3{
+            @include mobile {
+              text-align: center;
+            }
+          }
+
+          h4{
+            margin-bottom: 32px;
+            @include mobile {
+              text-align: center;
+            }
+          }
+
+          p{
+            font-weight: bold;
+            margin-bottom: 16px;
+            @include mobile {
+              text-align: center;
+            }
+          }
+
+          #job{
+            margin-bottom: 16px;
+            @include mobile {
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      #cv{
+        margin: 40px 0;
+        
+        h3{
+          font-size: 32px;
+          margin-bottom: 16px;
+        }
+        ul{
+          display: inline-block;
+          text-align: left;
+          @include mobile {
+            text-align: center;
+          }
+
+          li{
+            @include mobile {
+              list-style: none;
+            }
+          }
+        }
+      }
+
+      #skill{
+        h3{
+          font-size: 32px;
+          margin-bottom: 16px;
+        }
+      
+        #skillList{
+          display: flex;
+          justify-content: center;
+          gap: 32px;
+          @include mobile {
+            display: block;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 8px;
+          }
+        
+          li{
+            list-style: none;
+        
+            img{
+              width: 104px;
+              height: 104px;
+            }
+          }
+        }
+      }
+    }
+         /* ---------- skillアイコン時間差フェードイン ----------*/
+        .sa {
+          opacity: 0;
+          transition: all 1s ease;
+        }
+        
+        .sa.show {
+          opacity: 1;
+          transform: none;
+        }
+        .sa--up {
+          transform: translate(0, 104px);
+        }
+
+    /* ---------- #service ----------*/
+    #service{
+      text-align: center;
+      padding: 40px 0;
+
+      >h2{
+        max-width: 600px;
+        border: solid 2px black;
+        padding: 8px 0px;
+        font-size: 32px;
+        margin: 0 auto;
+      }
+
+      #serviceList{
+        padding: 40px 0;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        gap: 104px;
+        @include mobile {
+          display: none;
+        }
+
+        .eachService{
+          h3{
+            font-size: 24px;
+
+            .fas{
+              margin-right: 8px;
+            }
+          }
+
+          img{
+            width: 200px;
+            height: 200px;
+            border-radius: 32px;
+            box-shadow: 0 8px 8px #666666;
+          }
+
+          p{
+            margin: 16px 0;
+            font-size: 32px;
+            color:red;
+            font-weight: bold;
+          }
+        }
+      }
+    /* ----------  #serviceList スマホ----------*/
+      #serviceList-sp{
+        display: none;
+        @include mobile {
+          display: block;
+          padding: 40px 0;
+          margin: 0 auto;
+        }
+
+        .eachService-sp{
+          display: flex;
+          justify-content: center;
+          margin: 0 auto;
+          gap: 24px;
+
+          img{
+            width: 100px;
+            height: 100px;
+            border-radius: 32px;
+          }
+
+          h3{
+            font-size: 24px;
+
+            .fas{
+              margin-right: 8px;
+            }
+          }
+
+          p{
+            margin: 16px 0;
+            font-size: 24px;
+            color:red;
+            font-weight: bold;
+          }
+        }
+      }
+
+      #comment{
+        li{
+          margin: 8px 0;
+          .bell{
+            margin-right: 8px;
+          }
+        }
+      }
+    }
+
+    /* ---------- #works ----------*/
+    #works{
+      text-align: center;
+      padding: 40px 0;
+      max-width: 960px;
+      margin: 0 auto;
+
+      >h2{
+        max-width: 600px;
+        border: solid 2px black;
+        padding: 8px 0px;
+        font-size: 32px;
+        margin: 0 auto;
+      }
+
+      #worksList{
+        padding: 40px 0;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 104px;
+        @include mobile {
+          display: none;
+        }
+
+        .eachWorks{
+          h3{
+            font-size: 24px;
+            
+            .fas{
+              margin-right: 8px;
+            }
+          }
+
+          p{
+            margin: 16px 0;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(transparent 70%, #a7d6ff 70%);
+          }
+
+          a{
+            transition-duration: 0.5s;
+            &:hover{
+              opacity: 0.5;
+              transition-duration: 0.5s;
+            }
+
+              img{
+                width: 200px;
+                height: 200px;
+                border-radius: 32px;
+                box-shadow: 0 8px 8px #666666;
+              }
+          }
+        }
+      }
+
+      /* ---------- #worksList スマホ---------- */
+      #worksList-sp{
+        display: none;
+        @include mobile {
+          display: block;
+          padding: 40px 0;
+          margin: 0 auto;
+        }
+
+        #partido{
+          h4{
+            font-size: 20px;
+
+            .fas{
+              margin-right: 8px;
+            }
+          }
+
+            a{
+              .partidoImg{
+                width: 300px;
+                height: 150px;
+                box-shadow:none;
+                border-radius: 8px;
+              }
+            }
+          }
+
+          h4{
+            font-size: 20px;
+            margin: 40px 0 24px 0;
+          }
+
+          #copy{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-gap: 8px;
+          
+            .eachWorks-sp{
+              p{
+                margin: 8px 0;
+                font-size: 16px;
+                font-weight: bold;
+              }
+              img{
+                width: 104px;
+                height: 104px;
+                border-radius: 8px;
+              }
+            }
+          }
+        }
+      }
+
+
+    /* ---------- contact ---------- */
+    #form{
+      text-align: center;
+      padding: 40px 0;
+      max-width: 960px;
+      margin: 0 auto;
+
+      >h2{
+        max-width: 600px;
+        border: solid 2px black;
+        padding: 8px 0px;
+        font-size: 32px;
+        margin: 0 auto;
+      }
+
+      >p{
+        margin: 16px 0;
+      }
+
+        .contact{
+          display: block;
+          width:60%;
+          margin: 0 auto;
+          height: 64px;
+          margin-bottom: 24px;
+          border: solid 1px rgb(117, 116, 116);
+          border-radius: 4px;
+          line-height: 64px;
+          padding: 8px;
+          box-sizing: border-box;
+          @include mobile {
+            width: 80%;
+          }
+
+          // クリックしたときに枠線
+          &:focus {
+            border-color: #a0c6ff;   /* 枠線の色 */
+            border-width: 3px;
+            outline: none;
+          }
+        }
+        // 送信ボタンのCSS及びアニメーション
+        #btn {
+          display: inline-block;
+          width: 142px;
+          height: 56px;
+          text-align: center;
+          text-decoration: none;
+          line-height: 56px;
+          outline: none;
+          border-radius: 4px;
+          margin-bottom: 16px;
+          @include mobile {
+            width: 80%;
+          }
+        }
+        #btn::before,
+        #btn::after {
+          position: absolute;
+          z-index: -1;
+          display: block;
+          content: '';
+        }
+        #btn,
+        #btn::before,
+        #btn::after {
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+          -webkit-transition: all .3s;
+          transition: all .3s;
+        }
+        #btn {
+          position: relative;
+          z-index: 2;
+          background-color: #333;
+          border: 2px solid #333;
+          color: #fff;
+          line-height: 56px;
+        }
+        #btn:hover {
+          background-color: #fff;
+          border-color: #333;
+          color: #333;
+          font-weight: bold;
+        }
+        #btn::before,
+        #btn::after {
+          top: 0;
+          width: 50%;
+          height: 100%;
+          background-color: #333;
+        }
+        #btn::before {
+          right: 0;
+        }
+        #btn::after {
+          left: 0;
+        }
+        #btn:hover::before,
+        #btn:hover::after {
+          width: 0;
+          background-color: #333;
+        }
+        // 送信ボタンのCSS及びアニメーション↑ここまで
+        .time{
+          font-weight: bold;
+        }
+
+        ul>li{
+          list-style: none;
+        }
+    }
+
+    /* ---------- footer ---------- */
+    footer{
+    text-align: center;
+    padding: 40px 0;
+    background-color: rgba(198, 218, 255, 0.941); 
+    @include mobile {
+      padding: 16px 0;
+    }
+
+      .footer-wrapper{
+        >h3{
+            font-size: 24px;
+            padding: 16px 0;
+            @include mobile {
+              padding: 0;
+            }
+        }
+
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            padding-bottom: 16px;
+            @include mobile {
+              flex-flow:column ;
+              gap: 0px;
+            }
+
+            li{
+              @include mobile {
+                height: 56px;
+                line-height: 56px;
+                letter-spacing: 8px;
+                border-bottom:solid 1px rgb(117, 116, 116);
+              }
+
+              a{
+                text-decoration: none;
+                color: rgb(0, 0, 0);
+                font-weight: bold;
+                position: relative; /*アンダーラインの位置決め */
+                @include mobile {
+                  display: block;
+                }
+                /*hoverアンダーラインアニメーション */
+                &::after {
+                  position: absolute; /*親要素であるaタグを基準に位置を指定*/
+                  left: 0;            /*アンダーラインを各メニュー（aタグ）の左端に指定*/
+                  content: '';        /*テキスト無し*/
+                  width: 100%;        /*アンダーラインを各aタグの幅に合わせる*/
+                  height: 2px;        /*アンダーラインの高さ（太さ）*/
+                  background: #000000;/*アンダーラインの色*/
+                  bottom: 16px; /*アンダーラインが現れ始める位置（aタグの下辺からの高さ）*/
+                  opacity: 0;
+                  visibility: hidden;
+                  transition: 0.5s;
+                  @include mobile {
+                    display: none;
+                  }
+                }
+                &:hover::after {
+                  visibility: visible;
+                  bottom: -8px; /*アニメーションが止まる位置*/
+                  opacity: 1;
+                }
+                &:active {
+                  @include mobile {
+                    background-color: #fff;
+                  }
+                }
+              }
+            }
+          }
+
+          p{
+            font-size: 4px;
+          }
+        }
+      }
+  }
+}
